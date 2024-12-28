@@ -1,6 +1,6 @@
-import { createClient } from '@supabase/supabase-js';
-import { stripe } from './stripe';
-import { corsHeaders } from '../_shared/cors';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
+import { stripe } from './stripe.ts';
+import { corsHeaders } from '../_shared/cors.ts';
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -25,10 +25,6 @@ Deno.serve(async (req) => {
     
     const { data: { user }, error: userError } = await supabaseClient.auth.getUser(authHeader.replace('Bearer ', ''));
     if (userError || !user) throw new Error('Invalid token');
-
-    const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') ?? '', {
-      apiVersion: '2023-10-16',
-    });
 
     const customers = await stripe.customers.list({
       email: user.email,
