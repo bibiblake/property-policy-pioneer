@@ -2,6 +2,9 @@ import { Building2, DollarSign, FileText, AlertCircle } from "lucide-react";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { ExpiringPolicies } from "@/components/dashboard/ExpiringPolicies";
 import { CostOverview } from "@/components/dashboard/CostOverview";
+import { PolicyDistribution } from "@/components/dashboard/PolicyDistribution";
+import { RecentActivity } from "@/components/dashboard/RecentActivity";
+import { QuickActions } from "@/components/dashboard/QuickActions";
 
 const Index = () => {
   return (
@@ -37,11 +40,20 @@ const Index = () => {
       </div>
 
       <div className="grid gap-4 md:grid-cols-7">
+        <QuickActions />
+        <PolicyDistribution />
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-7">
         <ExpiringPolicies />
+        <RecentActivity />
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-7">
         <CostOverview />
       </div>
     </div>
   );
-};
+}
 
 export default Index;
