@@ -1,17 +1,5 @@
 import { Shield, Building2, FileText, Check } from "lucide-react";
 
-/**
- * Feature Component
- * 
- * Renders an individual feature with an icon, title, description, and list of benefits.
- * 
- * @param {Object} props - Component props
- * @param {React.ElementType} props.icon - The Lucide icon component to display
- * @param {string} props.title - Feature title
- * @param {string} props.description - Feature description
- * @param {string[]} props.benefits - List of feature benefits
- * @returns {JSX.Element} A feature card component
- */
 const Feature = ({ 
   icon: Icon, 
   title, 
@@ -30,28 +18,20 @@ const Feature = ({
     </dt>
     <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
       <p className="flex-auto">{description}</p>
-      <p className="mt-6">
+      <div className="mt-6">
         <ul className="space-y-3">
           {benefits.map((benefit) => (
             <li key={benefit} className="flex gap-x-3">
               <Check className="h-6 w-5 flex-none text-primary" />
-              {benefit}
+              <span className="text-sm sm:text-base">{benefit}</span>
             </li>
           ))}
         </ul>
-      </p>
+      </div>
     </dd>
   </div>
 );
 
-/**
- * FeaturesSection Component
- * 
- * Displays the main features of the application in a grid layout.
- * Each feature includes an icon, title, description, and list of benefits.
- * 
- * @returns {JSX.Element} The features section component
- */
 export function FeaturesSection() {
   const features = [
     {
@@ -75,8 +55,8 @@ export function FeaturesSection() {
   ];
 
   return (
-    <div className="bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="bg-white py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-primary">
             Manage Smarter
@@ -85,8 +65,8 @@ export function FeaturesSection() {
             Everything you need to manage property insurance
           </p>
         </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+        <div className="mx-auto mt-12 sm:mt-16 lg:mt-20">
+          <dl className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature) => (
               <Feature key={feature.title} {...feature} />
             ))}

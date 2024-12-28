@@ -10,7 +10,7 @@ export function HeroSection() {
     <>
       {/* Top-right sign in button for non-authenticated users */}
       {!user && (
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 z-10">
           <Link to="/login">
             <Button variant="ghost" size="sm" className="group">
               Sign In
@@ -21,7 +21,7 @@ export function HeroSection() {
       )}
       
       <div className="container mx-auto px-4 pt-20 pb-16 text-center lg:pt-32">
-        <h1 className="mx-auto max-w-4xl font-display text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl">
+        <h1 className="mx-auto max-w-4xl font-display text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-7xl">
           Manage Your{" "}
           <span className="relative whitespace-nowrap text-primary">
             <svg
@@ -36,7 +36,7 @@ export function HeroSection() {
           </span>{" "}
           Made Simple
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">
+        <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg tracking-tight text-slate-700 px-4">
           Streamline your multi-property insurance management with our intuitive platform. 
           Track policies, manage claims, and protect your investments all in one place.
         </p>
