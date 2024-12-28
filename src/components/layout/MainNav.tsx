@@ -4,6 +4,7 @@ import {
   LayoutDashboard,
   Settings,
   AlertCircle,
+  LogOut,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -16,6 +17,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useAuth } from "@/lib/auth";
+import { Button } from "@/components/ui/button";
 
 const items = [
   {
@@ -47,6 +50,7 @@ const items = [
 
 export function MainNav() {
   const location = useLocation();
+  const { signOut } = useAuth();
 
   return (
     <Sidebar>
@@ -69,6 +73,24 @@ export function MainNav() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup className="mt-auto">
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start" 
+                    onClick={signOut}
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    <span>Log Out</span>
+                  </Button>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
