@@ -1,11 +1,44 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Building2, DollarSign, FileText, AlertCircle } from "lucide-react";
+import { StatCard } from "@/components/dashboard/StatCard";
+import { ExpiringPolicies } from "@/components/dashboard/ExpiringPolicies";
+import { CostOverview } from "@/components/dashboard/CostOverview";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+        <p className="text-muted-foreground">
+          Overview of your insurance portfolio
+        </p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <StatCard
+          title="Total Properties"
+          value="12"
+          icon={<Building2 className="h-4 w-4 text-muted-foreground" />}
+        />
+        <StatCard
+          title="Active Policies"
+          value="24"
+          icon={<FileText className="h-4 w-4 text-muted-foreground" />}
+        />
+        <StatCard
+          title="Open Claims"
+          value="3"
+          icon={<AlertCircle className="h-4 w-4 text-muted-foreground" />}
+        />
+        <StatCard
+          title="Annual Premium"
+          value="$48,500"
+          icon={<DollarSign className="h-4 w-4 text-muted-foreground" />}
+        />
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-7">
+        <ExpiringPolicies />
+        <CostOverview />
       </div>
     </div>
   );
