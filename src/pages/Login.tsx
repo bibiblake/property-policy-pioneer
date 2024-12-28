@@ -20,13 +20,16 @@ const Login = () => {
     return <Navigate to="/" replace />;
   }
 
-  supabase.auth.onAuthStateChange((event, session) => {
-    if (event === 'USER_UPDATED') console.log('USER_UPDATED', session);
-    if (event === 'SIGNED_IN') {
-      console.log('SIGNED_IN', session);
+  const handleError = (error: Error) => {
+    console.error('Auth error:', error);
+    if (error.message.includes('Email not confirmed')) {
+      toast.error('Please check your email to verify your account before signing in', {
+        duration: 6000,
+      });
+    } else {
+      toast.error(error.message);
     }
-    if (event === 'SIGNED_OUT') console.log('SIGNED_OUT', session);
-  });
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
@@ -70,16 +73,19 @@ const Login = () => {
             providers={[]}
             view="sign_in"
             showLinks={true}
-            onError={(error) => {
-              console.error('Auth error:', error);
-              if (error.message.includes('Email not confirmed')) {
-                toast.error('Please check your email to verify your account before signing in', {
-                  duration: 6000,
-                });
-              } else {
-                toast.error(error.message);
-              }
+            localization={{
+              variables: {
+                sign_in: {
+                  email_label: 'Email',
+                  password_label: 'Password',
+                },
+                sign_up: {
+                  email_label: 'Email',
+                  password_label: 'Password',
+                },
+              },
             }}
+            onAuthError={handleError}
           />
         </div>
       </div>
