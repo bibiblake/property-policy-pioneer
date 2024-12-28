@@ -13,12 +13,16 @@ import { CostOverview } from "./CostOverview";
  * 
  * Component Structure:
  * - Header with title and description
- * - Statistics cards grid
- * - Quick actions and policy distribution
- * - Expiring policies and recent activity
- * - Cost overview chart
+ * - Statistics cards grid ({@link DashboardStats})
+ * - Quick actions and policy distribution ({@link QuickActions}, {@link PolicyDistribution})
+ * - Expiring policies and recent activity ({@link ExpiringPolicies}, {@link RecentActivity})
+ * - Cost overview chart ({@link CostOverview})
  * 
- * @returns {JSX.Element} The complete dashboard layout
+ * @component
+ * @example
+ * ```tsx
+ * <DashboardLayout />
+ * ```
  */
 export function DashboardLayout() {
   return (

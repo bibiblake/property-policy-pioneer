@@ -7,7 +7,11 @@ import { StatCard } from "@/components/dashboard/StatCard";
  * Displays key metrics and statistics in a grid layout at the top of the dashboard.
  * Each stat is represented by a StatCard component with an icon and value.
  * 
- * @returns {JSX.Element} The dashboard statistics component
+ * @component
+ * @example
+ * ```tsx
+ * <DashboardStats />
+ * ```
  */
 export function DashboardStats() {
   return (

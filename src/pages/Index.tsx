@@ -5,11 +5,17 @@ import { LandingPage } from "@/components/landing/LandingPage";
 /**
  * Index Page Component
  * 
- * Root page component that conditionally renders either the dashboard
- * or landing page based on user authentication status.
+ * Root-level component that serves as the main entry point of the application.
+ * Conditionally renders either the dashboard for authenticated users or the 
+ * landing page for visitors.
  * 
- * @returns {JSX.Element} Either the DashboardLayout for authenticated users
- *                        or the LandingPage for visitors
+ * @component
+ * @example
+ * ```tsx
+ * <BrowserRouter>
+ *   <Route path="/" element={<Index />} />
+ * </BrowserRouter>
+ * ```
  */
 const Index = () => {
   const { user } = useAuth();
