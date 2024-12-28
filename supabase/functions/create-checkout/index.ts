@@ -30,21 +30,23 @@ serve(async (req) => {
       apiVersion: '2023-10-16',
     });
 
+    const customers = await stripe.customers.list({
+      email: user.email,
+      limit: 1
+    });
+
+    let customer_id = undefined;
+    if (customers.data.length > 0) {
+      customer_id = customers.data[0].id;
+    }
+
+    console.log('Creating payment session...');
     const session = await stripe.checkout.sessions.create({
-      customer_email: user.email,
+      customer: customer_id,
+      customer_email: customer_id ? undefined : user.email,
       line_items: [
         {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'Premium Subscription',
-              description: 'Access to premium features',
-            },
-            unit_amount: 1999, // $19.99
-            recurring: {
-              interval: 'month',
-            },
-          },
+          price: 'your_price_id_here', // Replace with your actual Stripe price ID
           quantity: 1,
         },
       ],
@@ -53,9 +55,13 @@ serve(async (req) => {
       cancel_url: `${req.headers.get('origin')}/settings?canceled=true`,
     });
 
+    console.log('Payment session created:', session.id);
     return new Response(
       JSON.stringify({ url: session.url }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      { 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200,
+      }
     );
   } catch (error) {
     console.error('Error:', error);
@@ -64,7 +70,7 @@ serve(async (req) => {
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 400,
-      },
+      }
     );
   }
 });
