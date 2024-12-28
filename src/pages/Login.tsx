@@ -29,6 +29,12 @@ const Login = () => {
           </p>
         </div>
         <div className="bg-white shadow-sm rounded-lg p-6">
+          <div className="mb-4 text-sm text-muted-foreground">
+            <p className="font-medium mb-2">Password Requirements:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Minimum 6 characters long</li>
+            </ul>
+          </div>
           <Auth
             supabaseClient={supabase}
             appearance={{
