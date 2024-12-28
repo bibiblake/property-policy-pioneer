@@ -20,6 +20,14 @@ const Login = () => {
     return <Navigate to="/" replace />;
   }
 
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (event === 'USER_UPDATED') console.log('USER_UPDATED', session);
+    if (event === 'SIGNED_IN') {
+      console.log('SIGNED_IN', session);
+    }
+    if (event === 'SIGNED_OUT') console.log('SIGNED_OUT', session);
+  });
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="w-full max-w-md space-y-8">
@@ -33,9 +41,9 @@ const Login = () => {
           <div className="mb-4 text-sm text-muted-foreground">
             <p className="font-medium mb-2">Important Information:</p>
             <ul className="list-disc pl-5 space-y-1">
+              <li>You'll need to verify your email after signing up</li>
+              <li>Check your spam folder if you don't see the verification email</li>
               <li>Password must be at least 6 characters long</li>
-              <li>Make sure to use a valid email address</li>
-              <li>Check your email for confirmation link after signing up</li>
             </ul>
           </div>
           <Auth
@@ -62,6 +70,16 @@ const Login = () => {
             providers={[]}
             view="sign_in"
             showLinks={true}
+            onError={(error) => {
+              console.error('Auth error:', error);
+              if (error.message.includes('Email not confirmed')) {
+                toast.error('Please check your email to verify your account before signing in', {
+                  duration: 6000,
+                });
+              } else {
+                toast.error(error.message);
+              }
+            }}
           />
         </div>
       </div>
