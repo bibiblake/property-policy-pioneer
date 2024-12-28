@@ -20,17 +20,6 @@ const Login = () => {
     return <Navigate to="/" replace />;
   }
 
-  const handleError = (error: Error) => {
-    console.error('Auth error:', error);
-    if (error.message.includes('Email not confirmed')) {
-      toast.error('Please check your email to verify your account before signing in', {
-        duration: 6000,
-      });
-    } else {
-      toast.error(error.message);
-    }
-  };
-
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="w-full max-w-md space-y-8">
@@ -85,7 +74,6 @@ const Login = () => {
                 },
               },
             }}
-            onAuthError={handleError}
           />
         </div>
       </div>
