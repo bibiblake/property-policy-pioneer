@@ -7,6 +7,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { MainNav } from "@/components/layout/MainNav";
 import Index from "./pages/Index";
 import Policies from "./pages/Policies";
+import Properties from "./pages/Properties";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/policies" element={<Policies />} />
+                <Route path="/properties" element={<Properties />} />
               </Routes>
             </main>
           </div>
