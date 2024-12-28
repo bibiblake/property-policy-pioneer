@@ -45,6 +45,7 @@ const AppRoutes = () => {
           <Route path="/properties" element={<ProtectedRoute><Properties /></ProtectedRoute>} />
           <Route path="/claims" element={<ProtectedRoute><Claims /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route path="*" element={<Index />} />
         </Routes>
       </main>
     </div>
