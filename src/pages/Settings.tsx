@@ -6,6 +6,9 @@ import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
+import { Database } from "@/integrations/supabase/types";
+
+type Profile = Database['public']['Tables']['profiles']['Row'];
 
 const Settings = () => {
   const { user } = useAuth();
@@ -30,8 +33,9 @@ const Settings = () => {
         .single();
 
       if (error) throw error;
-      return data;
+      return data as Profile;
     },
+    enabled: !!user?.id,
   });
 
   const handleUpgrade = async () => {
@@ -83,7 +87,7 @@ const Settings = () => {
                 </p>
               </div>
             </div>
-            {profile?.subscription_tier === 'free' && (
+            {(!profile || profile.subscription_tier === 'free') && (
               <Button onClick={handleUpgrade}>
                 Upgrade to Premium
               </Button>
