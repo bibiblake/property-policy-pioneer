@@ -24,9 +24,9 @@ const Login = () => {
     <div className="flex min-h-screen flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold tracking-tight">Welcome back</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Welcome</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Sign in to your account to continue
+            Sign in to your account or create a new one
           </p>
         </div>
         <div className="bg-white shadow-sm rounded-lg p-6">
@@ -35,7 +35,6 @@ const Login = () => {
             <ul className="list-disc pl-5 space-y-1">
               <li>Password must be at least 6 characters long</li>
               <li>Make sure to use a valid email address</li>
-              <li>If you're a new user, please sign up first</li>
               <li>Check your email for confirmation link after signing up</li>
             </ul>
           </div>
@@ -60,16 +59,9 @@ const Login = () => {
             }}
             redirectTo={`${window.location.origin}/`}
             theme="light"
-            onError={(error) => {
-              console.error('Auth error:', error);
-              if (error.message.includes('invalid_credentials')) {
-                toast.error('Invalid email or password. Please try again.');
-              } else if (error.message.includes('weak_password')) {
-                toast.error('Password must be at least 6 characters long.');
-              } else {
-                toast.error('An error occurred. Please try again.');
-              }
-            }}
+            providers={[]}
+            view="sign_in"
+            showLinks={true}
           />
         </div>
       </div>
