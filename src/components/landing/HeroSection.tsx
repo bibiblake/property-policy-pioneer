@@ -1,16 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Rocket } from "lucide-react";
+import { Rocket, LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/lib/auth";
 
-/**
- * HeroSection Component
- * 
- * Displays the main landing page hero section with a compelling headline,
- * description, and call-to-action button.
- * 
- * @returns {JSX.Element} The hero section component
- */
 export function HeroSection() {
+  const { user } = useAuth();
+
   return (
     <div className="container mx-auto px-4 pt-20 pb-16 text-center lg:pt-32">
       <h1 className="mx-auto max-w-4xl font-display text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl">
@@ -33,12 +28,21 @@ export function HeroSection() {
         Track policies, manage claims, and protect your investments all in one place.
       </p>
       <div className="mt-10 flex justify-center gap-x-6">
-        <Link to="/login">
-          <Button size="lg" className="group">
-            Get Started Free
-            <Rocket className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Button>
-        </Link>
+        {user ? (
+          <Link to="/dashboard">
+            <Button size="lg" className="group">
+              Go to Dashboard
+              <Rocket className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+        ) : (
+          <Link to="/login">
+            <Button size="lg" className="group">
+              Sign In
+              <LogIn className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );
