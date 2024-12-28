@@ -38,13 +38,13 @@ const AppRoutes = () => {
       <main className={user ? "flex-1 p-8" : "w-full"}>
         {user && <SidebarTrigger />}
         <Routes>
+          <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<ProtectedRoute><Index /></ProtectedRoute>} />
           <Route path="/policies" element={<ProtectedRoute><Policies /></ProtectedRoute>} />
           <Route path="/properties" element={<ProtectedRoute><Properties /></ProtectedRoute>} />
           <Route path="/claims" element={<ProtectedRoute><Claims /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-          <Route path="/" element={<Index />} />
         </Routes>
       </main>
     </div>
