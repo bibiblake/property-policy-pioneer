@@ -3,6 +3,7 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { Navigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Login = () => {
   const { user, loading } = useAuth();
@@ -30,9 +31,12 @@ const Login = () => {
         </div>
         <div className="bg-white shadow-sm rounded-lg p-6">
           <div className="mb-4 text-sm text-muted-foreground">
-            <p className="font-medium mb-2">Password Requirements:</p>
+            <p className="font-medium mb-2">Important Information:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Minimum 6 characters long</li>
+              <li>Password must be at least 6 characters long</li>
+              <li>Make sure to use a valid email address</li>
+              <li>If you're a new user, please sign up first</li>
+              <li>Check your email for confirmation link after signing up</li>
             </ul>
           </div>
           <Auth
@@ -56,6 +60,16 @@ const Login = () => {
             }}
             redirectTo={`${window.location.origin}/`}
             theme="light"
+            onError={(error) => {
+              console.error('Auth error:', error);
+              if (error.message.includes('invalid_credentials')) {
+                toast.error('Invalid email or password. Please try again.');
+              } else if (error.message.includes('weak_password')) {
+                toast.error('Password must be at least 6 characters long.');
+              } else {
+                toast.error('An error occurred. Please try again.');
+              }
+            }}
           />
         </div>
       </div>
