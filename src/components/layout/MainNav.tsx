@@ -5,6 +5,7 @@ import {
   Settings,
   AlertCircle,
 } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -45,6 +46,8 @@ const items = [
 ];
 
 export function MainNav() {
+  const location = useLocation();
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -55,10 +58,14 @@ export function MainNav() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url} className="flex items-center gap-2">
+                    <Link 
+                      to={item.url} 
+                      className="flex items-center gap-2"
+                      data-active={location.pathname === item.url}
+                    >
                       <item.icon className="h-4 w-4" />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
