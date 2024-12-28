@@ -1,7 +1,13 @@
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
-import { Shield, Building2, FileText, Rocket, Check } from "lucide-react";
+import { Shield, Building2, FileText, Rocket, Check, AlertCircle, DollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
+import { StatCard } from "@/components/dashboard/StatCard";
+import { QuickActions } from "@/components/dashboard/QuickActions";
+import { PolicyDistribution } from "@/components/dashboard/PolicyDistribution";
+import { ExpiringPolicies } from "@/components/dashboard/ExpiringPolicies";
+import { RecentActivity } from "@/components/dashboard/RecentActivity";
+import { CostOverview } from "@/components/dashboard/CostOverview";
 
 const Index = () => {
   const { user } = useAuth();
