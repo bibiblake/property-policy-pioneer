@@ -8,6 +8,8 @@ import { MainNav } from "@/components/layout/MainNav";
 import Index from "./pages/Index";
 import Policies from "./pages/Policies";
 import Properties from "./pages/Properties";
+import Claims from "./pages/Claims";
+import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,8 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/policies" element={<Policies />} />
                 <Route path="/properties" element={<Properties />} />
+                <Route path="/claims" element={<Claims />} />
+                <Route path="/settings" element={<Settings />} />
               </Routes>
             </main>
           </div>
