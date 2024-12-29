@@ -1,22 +1,34 @@
 import { Button } from "@/components/ui/button";
 import { Rocket, LogIn } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
 
 export function HeroSection() {
   const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    if (user) {
+      navigate("/dashboard");
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <>
       {/* Top-right sign in button for non-authenticated users */}
       {!user && (
         <div className="absolute top-4 right-4 z-10">
-          <Link to="/login">
-            <Button variant="ghost" size="sm" className="group">
-              Sign In
-              <LogIn className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="group"
+            onClick={() => navigate("/login")}
+          >
+            Sign In
+            <LogIn className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Button>
         </div>
       )}
       
@@ -41,21 +53,14 @@ export function HeroSection() {
           Track policies, manage claims, and protect your investments all in one place.
         </p>
         <div className="mt-10 flex justify-center gap-x-6">
-          {user ? (
-            <Link to="/dashboard">
-              <Button size="lg" className="group">
-                Go to Dashboard
-                <Rocket className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-          ) : (
-            <Link to="/login">
-              <Button size="lg" className="group">
-                Get Started Free
-                <Rocket className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-          )}
+          <Button
+            size="lg"
+            className="group"
+            onClick={handleNavigation}
+          >
+            {user ? "Go to Dashboard" : "Get Started Free"}
+            <Rocket className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Button>
         </div>
       </div>
     </>

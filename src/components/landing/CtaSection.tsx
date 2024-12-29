@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function CtaSection() {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-primary">
       <div className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -14,11 +16,13 @@ export function CtaSection() {
             No credit card required.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Link to="/login">
-              <Button size="lg" className="bg-white text-primary hover:bg-gray-100">
-                Get Started Free
-              </Button>
-            </Link>
+            <Button 
+              size="lg" 
+              className="bg-white text-primary hover:bg-gray-100"
+              onClick={() => navigate("/login")}
+            >
+              Get Started Free
+            </Button>
           </div>
         </div>
       </div>
