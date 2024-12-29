@@ -8,13 +8,13 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { MainNav } from "@/components/layout/MainNav";
 import { AuthProvider, useAuth } from "@/lib/auth";
 
-// Lazy load route components
-const Index = lazy(() => import("./pages/Index"));
-const Login = lazy(() => import("./pages/Login"));
-const Policies = lazy(() => import("./pages/Policies"));
-const Properties = lazy(() => import("./pages/Properties"));
-const Claims = lazy(() => import("./pages/Claims"));
-const Settings = lazy(() => import("./pages/Settings"));
+// Lazy load route components with proper chunk names
+const Index = lazy(() => import(/* webpackChunkName: "index" */ "./pages/Index"));
+const Login = lazy(() => import(/* webpackChunkName: "login" */ "./pages/Login"));
+const Policies = lazy(() => import(/* webpackChunkName: "policies" */ "./pages/Policies"));
+const Properties = lazy(() => import(/* webpackChunkName: "properties" */ "./pages/Properties"));
+const Claims = lazy(() => import(/* webpackChunkName: "claims" */ "./pages/Claims"));
+const Settings = lazy(() => import(/* webpackChunkName: "settings" */ "./pages/Settings"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,10 +25,13 @@ const queryClient = new QueryClient({
   },
 });
 
-// Loading component
+// Enhanced loading spinner with better UX
 const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+  <div className="flex items-center justify-center min-h-[200px]">
+    <div className="relative">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      <div className="mt-4 text-sm text-muted-foreground">Loading...</div>
+    </div>
   </div>
 );
 
